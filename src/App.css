@@ -1,0 +1,24 @@
+#root {
+  width: 100%;
+  padding: 0; 
+  margin: 0;
+}
+
+nav {
+  background-color: #F8F9FA;
+  display: flex;
+  justify-content: left;
+  gap: 30px;
+  padding: 20px 20px;
+}
+nav a {
+  color: #818181;
+  text-decoration: none;
+  font-size: 24px;
+  transition: 0.2s;
+}
+nav a.active {
+  color: black;
+  font-size: 28px;
+
+}

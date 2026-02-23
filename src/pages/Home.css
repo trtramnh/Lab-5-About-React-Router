@@ -1,0 +1,46 @@
+.hero {
+  position: relative;
+}
+
+/* hero full ngang */
+.hero img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-next {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.hero-next-button {
+  width: 50px;
+  height: 4px;
+  padding: 0;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.hero-next-button.active {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.menu-row {
+  display: flex;
+  justify-content: space-around;
+}
+
+.menu-row img {
+  width: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.home-title {
+  color: red;
+}

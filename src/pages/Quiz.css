@@ -58,6 +58,17 @@
 .option input {
   margin: 0; /* bỏ margin mặc định của input */
 }
+.btn-previous {
+  margin-top: 8px;
+  border: none;
+  background: #666;
+  color: black;
+  padding: 8px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
 
 /* Nút Next */
 .btn-next {

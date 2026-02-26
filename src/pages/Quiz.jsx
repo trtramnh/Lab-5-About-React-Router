@@ -1,95 +1,89 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { quizData } from "../data/quizData";
 import Question from "../components/Question";
 import "./Quiz.css";
 
 export default function Quiz() {
-  // 1) index: lưu vị trí câu hỏi hiện tại (0,1,2,...)
+  // 1 State index: lưu index câu hỏi hiện tại
   const [index, setIndex] = useState(0);
-
-  // 2) selected: lưu đáp án người dùng đang chọn (ban đầu chưa chọn)
-  const [selected, setSelected] = useState(null);
-
-  // 3) score: lưu điểm hiện tại (mỗi câu đúng +1)
-  const [score, setScore] = useState(0);
-
-  // 4) done: kiểm tra đã làm xong hết quiz chưa
+  //2 State answers: lưu câu trả lời của người dùng
+  const [answers, setAnswers] = useState(Array(quizData.length).fill(null));
+  //3 State done: lưu trạng thái đã hoàn thành quiz chưa
   const [done, setDone] = useState(false);
-
-  // 5) current: lấy câu hỏi hiện tại từ quizData theo index
+// Lấy câu hỏi hiện tại và câu trả lời đã chọn
   const current = quizData[index];
-
-  // 6) handleNext: xử lý khi bấm nút Next
+  // Lấy câu trả lời đã chọn cho câu hỏi hiện tại
+  const selected = answers[index];
+// Hàm xử lý khi người dùng chọn câu trả lời
+  const handleSelect = (value) => {
+    setAnswers((prev) => {
+      const next = [...prev];
+      next[index] = value;
+      return next;
+    });
+  };
+// Hàm xử lý khi người dùng nhấn nút Previous
+  const handlePrevious = () => {
+    if (index > 0) setIndex((i) => i - 1);
+  };
+// Hàm xử lý khi người dùng nhấn nút Next
   const handleNext = () => {
-    // 6.1) Nếu đáp án đang chọn đúng → tăng điểm
-    if (selected === current.correctAnswer) setScore((s) => s + 1);
+    if (selected === null) return;
 
-    // 6.2) Nếu đang ở câu cuối → kết thúc quiz
     if (index === quizData.length - 1) {
       setDone(true);
     } else {
-      // 6.3) Nếu chưa phải câu cuối → chuyển sang câu tiếp theo
       setIndex((i) => i + 1);
-
-      // 6.4) Reset lựa chọn cho câu mới
-      setSelected(null);
     }
   };
+// Tính điểm số dựa trên câu trả lời của người dùng và đáp án đúng
+  const score = useMemo(() => {
+    return answers.reduce((total, answer, i) => {
+      return total + (answer === quizData[i].correctAnswer ? 1 : 0);
+    }, 0);
+  }, [answers]);
 
   return (
-    // 7) quiz-page: wrapper ngoài cùng của trang quiz
     <div className="quiz-page">
-      {/* 8) quiz-layout: layout 2 cột (trái câu hỏi, phải kết quả) */}
       <div className="quiz-layout">
-        
-        {/* 9) LEFT: khu vực câu hỏi */}
         <div className="quiz-left">
-          {/* 10) Nếu chưa done → hiển thị câu hỏi */}
           {!done ? (
             <>
-              {/* 11) Hiển thị số thứ tự câu hỏi (index + 1 vì index bắt đầu từ 0) */}
               <h1>Question {index + 1}</h1>
 
-              {/* 12) Box chứa nội dung câu hỏi + options + nút Next */}
               <div className="question-box">
-                
-                {/* 13) Hiển thị nội dung câu hỏi */}
                 <p className="question-text">{current.question}</p>
 
-                {/* 14) Component Question: render danh sách đáp án
-                      - data: câu hiện tại
-                      - selected: đáp án đang chọn
-                      - onSelect: hàm setSelected để cập nhật lựa chọn */}
                 <Question
                   data={current}
                   selected={selected}
-                  onSelect={setSelected}
+                  onSelect={handleSelect}
                 />
 
-                {/* 15) Nút Next:
-                      - gọi handleNext khi bấm
-                      - disable khi chưa chọn đáp án */}
+                <button
+                  className="btn-previous"
+                  onClick={handlePrevious}
+                  disabled={index === 0}
+                >
+                  Previous
+                </button>
+
                 <button
                   className="btn-next"
                   onClick={handleNext}
                   disabled={selected === null}
                 >
-                  Next
+                  {index === quizData.length - 1 ? "Finish" : "Next"}
                 </button>
               </div>
             </>
           ) : null}
         </div>
 
-        {/* 16) RIGHT: khu vực kết quả */}
         <div className="quiz-right">
-          {/* 17) Nếu done → hiển thị kết quả */}
           {done ? (
             <>
-              {/* 18) Thông báo hoàn thành */}
               <h1 className="quiz-completed">Quiz Completed!</h1>
-
-              {/* 19) Hiển thị điểm */}
               <p className="quiz-score">Your score: {score}</p>
             </>
           ) : null}

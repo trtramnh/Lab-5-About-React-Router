@@ -2,28 +2,38 @@ import { useState } from "react";
 import { Form, Button, Row, Col, InputGroup } from "react-bootstrap";
 
 export default function Contact() {
+  // 1 State validated: lưu trạng thái form đã submit chưa
   const [validated, setValidated] = useState(false);
 
+  // 2️ Hàm xử lý submit form
   const handleSubmit = (event) => {
     const form = event.currentTarget;
+
+    // Nếu form không hợp lệ → chặn submit
     if (!form.checkValidity()) {
       event.preventDefault();
       event.stopPropagation();
     }
+
+    // Bật chế độ hiển thị validation UI
     setValidated(true);
   };
 
   return (
     <div className="p-4">
+      {/* 3️ Form chính */}
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
+        
+        {/* 4️ Row 1: First name - Last name - Username */}
         <Row className="mb-3">
+          
+          {/* First Name */}
           <Form.Group as={Col} md="4" controlId="validationFirstName">
             <Form.Label>First name</Form.Label>
             <InputGroup hasValidation>
               <Form.Control
                 type="text"
                 placeholder="First name"
-                aria-describedby="inputGroupPrepend"
                 required
               />
               <Form.Control.Feedback type="invalid">
@@ -32,13 +42,13 @@ export default function Contact() {
             </InputGroup>
           </Form.Group>
 
+          {/* Last Name */}
           <Form.Group as={Col} md="4" controlId="validationLastName">
             <Form.Label>Last name</Form.Label>
             <InputGroup hasValidation>
               <Form.Control
                 type="text"
                 placeholder="Last name"
-                aria-describedby="inputGroupPrepend"
                 required
               />
               <Form.Control.Feedback type="invalid">
@@ -47,14 +57,14 @@ export default function Contact() {
             </InputGroup>
           </Form.Group>
 
+          {/* Username */}
           <Form.Group as={Col} md="4" controlId="validationUsername">
             <Form.Label>Username</Form.Label>
             <InputGroup hasValidation>
-              <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
+              <InputGroup.Text>@</InputGroup.Text>
               <Form.Control
                 type="text"
                 placeholder="Username"
-                aria-describedby="inputGroupPrepend"
                 required
               />
               <Form.Control.Feedback type="invalid">
@@ -64,7 +74,9 @@ export default function Contact() {
           </Form.Group>
         </Row>
 
+        {/* 5️ Row 2: City - State - Zip */}
         <Row className="mb-3">
+          
           <Form.Group as={Col} md="6" controlId="validationCity">
             <Form.Label>City</Form.Label>
             <Form.Control required type="text" placeholder="City" />
@@ -90,6 +102,7 @@ export default function Contact() {
           </Form.Group>
         </Row>
 
+        {/* 6️ Checkbox điều khoản */}
         <Form.Group className="mb-3">
           <Form.Check
             required
@@ -99,6 +112,7 @@ export default function Contact() {
           />
         </Form.Group>
 
+        {/* 7️ Nút Submit */}
         <Button type="submit">Submit form</Button>
       </Form>
     </div>

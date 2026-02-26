@@ -1,3 +1,5 @@
+//lay data tu quizData va hien thi cau hoi va cac lua chon
+
 export default function Question({ data, selected, onSelect }) {
   return (
     <div>

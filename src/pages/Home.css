@@ -1,46 +1,70 @@
-.hero {
+/* =====================================================
+   1️ Slider container
+   position: relative để làm mốc cho absolute bên trong
+===================================================== */
+.slider {
   position: relative;
 }
 
-/* hero full ngang */
-.hero img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  display: block;
+/* =====================================================
+   2️ Ảnh slider chiếm full chiều ngang
+===================================================== */
+.slider img {
+  width: 100%;        /* full ngang màn hình */
+  height: auto;       /* giữ đúng tỉ lệ ảnh */
+  object-fit: cover;  /* cắt ảnh cho đẹp nếu cần */
+  display: block;     /* bỏ khoảng trắng dưới ảnh */
 }
 
-.hero-next {
-  position: absolute;
-  left: 50%;
-  bottom: 14px;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
+/* =====================================================
+   3️ Thanh nút chuyển slide (nằm giữa phía dưới)
+===================================================== */
+.slider-next {
+  position: absolute;      /* định vị so với .slider */
+  left: 50%;               /* ra giữa theo chiều ngang */
+  bottom: 14px;            /* cách đáy 14px */
+  transform: translateX(-50%); /* căn giữa chính xác */
+  display: flex;           /* xếp nút theo hàng ngang */
+  gap: 10px;               /* khoảng cách giữa các nút */
 }
 
-.hero-next-button {
-  width: 50px;
-  height: 4px;
+/* =====================================================
+   4️ Nút chuyển slide (thanh nhỏ)
+===================================================== */
+.slider-next-button {
+  width: 50px;                 /* chiều ngang thanh */
+  height: 4px;                 /* chiều cao thanh */
   padding: 0;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.3); /* màu xám nhạt */
 }
 
-.hero-next-button.active {
-  background: rgba(0, 0, 0, 0.8);
+/* =====================================================
+   5️ Nút đang active (đậm hơn)
+===================================================== */
+.slider-next-button.active {
+  background: rgba(0, 0, 0, 0.8); /* đậm hơn khi chọn */
 }
 
+/* =====================================================
+   6️ Hàng hiển thị menu (6 ảnh món ăn)
+===================================================== */
 .menu-row {
-  display: flex;
-  justify-content: space-around;
+  display: flex;                 /* xếp ngang */
+  justify-content: space-around; /* giãn đều khoảng cách */
 }
 
+/* =====================================================
+   7️ Ảnh món ăn
+===================================================== */
 .menu-row img {
-  width: 150px;
-  border-radius: 50%;
-  object-fit: cover;
+  width: 150px;       /* kích thước ảnh */
+  border-radius: 50%; /* bo tròn thành hình tròn */
+  object-fit: cover;  /* giữ tỉ lệ ảnh */
 }
 
+/* =====================================================
+   8️ Tiêu đề trang
+===================================================== */
 .home-title {
-  color: red;
+  color: red; /* chữ màu đỏ */
 }

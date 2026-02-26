@@ -1,25 +1,31 @@
 /* Quiz.css — style giống hình mẫu Lab 4 */
 
+/* Padding tổng cho trang quiz */
 .quiz-page {
   padding: 24px;
 }
 
-/* layout 2 cột: trái câu hỏi, phải kết quả */
+/* Layout 2 cột:
+   - Cột trái: câu hỏi (fixed 520px)
+   - Cột phải: kết quả / điểm (flex 1fr) */
 .quiz-layout {
   display: grid;
   grid-template-columns: 520px 1fr;
-  gap: 40px;
-  align-items: start;
+  gap: 40px;           /* khoảng cách giữa 2 cột */
+  align-items: start;  /* căn lên đầu */
 }
 
-/* ===== LEFT: Question box ===== */
+/* ===== LEFT: khu vực câu hỏi ===== */
+
+/* Tiêu đề bên trái */
 .quiz-left h1 {
-  margin: 0 0 12px;
+  margin: 0 0 12px;    /* cách dưới 12px */
   font-size: 22px;
-  color: #d32f2f; /* đỏ */
+  color: #d32f2f;      /* đỏ */
   font-weight: 700;
 }
 
+/* Khung chứa câu hỏi + option */
 .question-box {
   background: #fff;
   border: 1px solid #eee;
@@ -27,17 +33,18 @@
   padding: 16px 14px;
 }
 
+/* Nội dung câu hỏi */
 .question-text {
   margin: 0 0 14px;
   font-size: 12px;
-  color: #666;
+  color: #666;         /* xám */
 }
 
-/* option row */
+/* Một dòng option (radio + text) */
 .option {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  display: flex;        /* để radio và text nằm ngang */
+  align-items: center;  /* căn giữa theo chiều dọc */
+  gap: 10px;            /* khoảng cách giữa radio và chữ */
   padding: 10px 10px;
   border: 1px solid #eee;
   border-radius: 4px;
@@ -47,11 +54,12 @@
   background: #fff;
 }
 
+/* Radio input trong option */
 .option input {
-  margin: 0;
+  margin: 0; /* bỏ margin mặc định của input */
 }
 
-/* Next button */
+/* Nút Next */
 .btn-next {
   margin-top: 8px;
   border: none;
@@ -63,16 +71,20 @@
   font-size: 12px;
 }
 
+/* Trạng thái disabled của nút Next */
 .btn-next:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-/* ===== RIGHT: Result ===== */
+/* ===== RIGHT: khu vực kết quả ===== */
+
+/* Kéo kết quả xuống thấp một chút để cân layout */
 .quiz-right {
   padding-top: 32px;
 }
 
+/* Chữ "Quiz Completed!" */
 .quiz-completed {
   margin: 0 0 10px;
   font-size: 48px;
@@ -80,13 +92,16 @@
   font-weight: 800;
 }
 
+/* Dòng hiển thị điểm */
 .quiz-score {
   margin: 0;
   font-size: 18px;
   color: #333;
 }
 
-/* responsive */
+/* Responsive:
+   - Màn nhỏ: chuyển layout về 1 cột
+   - Bỏ padding-top của phần kết quả */
 @media (max-width: 900px) {
   .quiz-layout {
     grid-template-columns: 1fr;
